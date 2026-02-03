@@ -2,44 +2,17 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Sealed Letter</title>
+<title>The Tavern Letter</title>
 
 <style>
 body {
-  background: radial-gradient(circle, #0f0f0f, #000);
-  height: 100vh;
   margin: 0;
+  height: 100vh;
+  background: radial-gradient(circle, #1a1a1a, #000);
   display: flex;
   justify-content: center;
   align-items: center;
   font-family: "Garamond", "Georgia", serif;
-  color: #3b2b1a;
-}
-
-.candle {
-  position: absolute;
-  width: 12px;
-  height: 60px;
-  background: #eee;
-  border-radius: 5px;
-  top: 50%;
-}
-
-.flame {
-  position: absolute;
-  top: -18px;
-  left: 50%;
-  width: 12px;
-  height: 18px;
-  background: orange;
-  border-radius: 50%;
-  transform: translateX(-50%);
-  animation: flicker 0.2s infinite alternate;
-}
-
-@keyframes flicker {
-  from { opacity: 0.7; transform: translateX(-50%) scale(1); }
-  to { opacity: 1; transform: translateX(-50%) scale(1.1); }
 }
 
 .paper {
@@ -47,9 +20,90 @@ body {
   width: 420px;
   padding: 35px;
   border: 2px solid #8b6f47;
-  box-shadow: 0 0 40px rgba(255, 200, 120, 0.3);
-  position: relative;
+  box-shadow: 0 0 40px rgba(255, 200, 120, 0.4);
 }
 
-.paper:before {
-  cont
+h1 {
+  text-align: center;
+  font-weight: normal;
+  margin-top: 0;
+}
+
+#text {
+  white-space: pre-line;
+  min-height: 260px;
+  color: #3b2b1a;
+}
+
+button {
+  display: block;
+  margin: 25px auto 0;
+  padding: 10px 22px;
+  background: #8b0000;
+  color: #f3e5c0;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+button:hover {
+  background: #a00000;
+}
+</style>
+</head>
+
+<body>
+
+<div class="paper">
+  <h1>✉️ A Sealed Invitation</h1>
+  <p style="text-align:center; opacity:0.6;">A letter rests on the table…</p>
+  <div id="text"></div>
+  <button onclick="start()">Break the seal</button>
+</div>
+
+<script>
+const letter = `
+To NOOT,
+
+If this letter has found you,
+then fate has already taken notice.
+
+On the night of Valentine’s Day,
+a certain tavern will light its hearth
+for more than warmth and drink.
+
+Games will be played.
+Dice will decide.
+Promises may be spoken
+that echo beyond this night.
+
+Not all who enter do so by chance.
+Some are invited.
+
+If you choose to attend,
+come not for gold,
+but for what may be shared.
+
+— The Tavern Keeper
+`;
+
+let i = 0;
+const speed = 35;
+const textDiv = document.getElementById("text");
+
+function start() {
+  document.querySelector("button").style.display = "none";
+  typeWriter();
+}
+
+function typeWriter() {
+  if (i < letter.length) {
+    textDiv.innerHTML += letter.charAt(i);
+    i++;
+    setTimeout(typeWriter, speed);
+  }
+}
+</script>
+
+</body>
+</html>
